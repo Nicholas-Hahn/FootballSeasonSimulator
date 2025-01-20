@@ -8,18 +8,25 @@ namespace FootballSeasonSimulator
 {
     internal class Team
     {
-        public int Id { get; }
         public string Name { get; }
         public int OffensePower { get; }
         public int DefensePower { get; }
+        public List<Game> Games { get; }
 
-        public Team(int Id, string Name, int OffensePower, int DefensePower)
+        public Team(string name, int offensePower, int defensePower)
         {
-            this.Id = Id;
-            this.Name = Name;
-            this.OffensePower = OffensePower;
-            this.DefensePower = DefensePower;
+            Name = name;
+            OffensePower = offensePower;
+            DefensePower = defensePower;
+            Games = new List<Game>();
         }
 
+        public Team(string name)
+        {
+            Name = name;
+            OffensePower = 100;
+            DefensePower = 100;
+            Games = new List<Game>();
+        }
     }
 }

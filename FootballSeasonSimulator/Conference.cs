@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace FootballSeasonSimulator
 {
-    internal class Division
+    internal class Conference
     {
         public string Name { get; }
-        public List<Team> Teams { get; set; }
+        public List<Division> Divisions { get; }   
 
-        public Division(string name)
+        public Conference(string name)
         {
             Name = name;
-            Teams = new List<Team>();
+            Divisions = new List<Division>();
         }
+
     }
 }

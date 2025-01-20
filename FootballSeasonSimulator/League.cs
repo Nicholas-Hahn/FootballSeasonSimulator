@@ -70,6 +70,11 @@ namespace FootballSeasonSimulator
             newDiv.Teams.Add(new Team("Raiders"));
             Afc.Divisions.Add(newDiv);
 
+            DebugPrintout();
+        }
+
+        private void DebugPrintout()
+        {
             Console.WriteLine("League Built");
             Console.WriteLine("NFC");
             foreach (var div in Nfc.Divisions)
@@ -90,6 +95,5 @@ namespace FootballSeasonSimulator
                 }
             }
         }
-
     }
 }

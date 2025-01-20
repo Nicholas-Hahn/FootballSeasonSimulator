@@ -10,16 +10,23 @@ namespace FootballSeasonSimulator
     {
         public Team AwayTeam { get; }
         public Team HomeTeam { get; }
+        public int AwayTeamScore { get; }
+        public int HomeTeamScore { get; }
 
         public Game(Team awayTeam, Team homeTeam)
         {
             AwayTeam = awayTeam;
             HomeTeam = homeTeam;
+            AwayTeamScore = 0;
+            HomeTeamScore = 0;
         }
 
         public void Simulate()
         {
-
+            //TODO Get score of game
+            //TODO create results for each team, add to team results
+            Console.WriteLine(AwayTeam.Name + " - " + AwayTeamScore + " : " 
+                + HomeTeamScore + " - " + HomeTeam.Name);
         }
     }
 }

@@ -11,11 +11,13 @@ namespace FootballSeasonSimulator
     {
         public Conference Nfc { get; }
         public Conference Afc { get; }
+        public List<Team> Teams { get; }
 
         public League()
         {
             Nfc = new Conference("NFC");
             Afc = new Conference("AFC");
+            Teams = new List<Team>();
         }
 
         public void BuildLeague()
@@ -70,7 +72,27 @@ namespace FootballSeasonSimulator
             newDiv.Teams.Add(new Team("Raiders"));
             Afc.Divisions.Add(newDiv);
 
+            BuildTeamList();
+
             DebugPrintout();
+        }
+
+        private void BuildTeamList()
+        {
+            foreach (var division in Nfc.Divisions)
+            {
+                foreach (var team in division.Teams)
+                {
+                    Teams.Add(team);
+                }
+            }
+            foreach (var division in Afc.Divisions)
+            {
+                foreach (var team in division.Teams)
+                {
+                    Teams.Add(team);
+                }
+            }
         }
 
         private void DebugPrintout()
@@ -95,5 +117,6 @@ namespace FootballSeasonSimulator
                 }
             }
         }
+
     }
 }

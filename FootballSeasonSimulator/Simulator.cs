@@ -8,13 +8,16 @@ namespace FootballSeasonSimulator
 {
     internal class Simulator
     {
-        int lastSelection = 0;
-        int currentWeek = 1;
+        int lastSelection;
+        int currentWeek;
         League league;
         List<List<Game>> regularSeason;
 
+
         public Simulator()
         {
+            lastSelection = 0;
+            currentWeek = 1;
             league = new League();
             regularSeason = new List<List<Game>>();
         }
@@ -27,7 +30,7 @@ namespace FootballSeasonSimulator
 
         private void Loop()
         {
-            //while
+            //TODO while loop for restart
             MainMenu();
             if (lastSelection == 9) return;
             GenerateSeason();
@@ -35,14 +38,16 @@ namespace FootballSeasonSimulator
             while (currentWeek <= regularSeason.Count)
             {
                 WeekStart(currentWeek);
-                if (lastSelection == 9) return;
-
                 SimulateWeek(currentWeek);
-                if (lastSelection == 9) return;
+                CurrentStandings();
+                //TODO Divisional clinches
 
                 currentWeek += 1;
             }
-            
+
+            //TODO Season Results
+            //TODO Playoffs Bracket
+            //TODO Playoffs Simulation
         }
 
         private void MainMenu()
@@ -69,30 +74,17 @@ namespace FootballSeasonSimulator
 
         private void WeekStart(int weekNumber)
         {
-            lastSelection = 0;
-            //while (lastSelection == 0)
-            //{
-                Console.Clear();
-                Console.WriteLine("------\n"
-                                + "WEEK " + weekNumber + "\n"
-                                + "------\n");
+            Console.Clear();
+            Console.WriteLine("------\n"
+                            + "WEEK " + weekNumber + "\n"
+                            + "------\n");
 
-                DisplayWeekSchedule(weekNumber);
-                Console.WriteLine();
+            DisplayWeekSchedule(weekNumber);
+            Console.WriteLine();
 
-                Console.WriteLine("\nPress ENTER to Continue\n");
+            Console.WriteLine("\nPress ENTER to Continue\n");
 
-                //Console.WriteLine("OPTIONS:\n"
-                //                + "1. Simulate Week\n"
-                //                + "9. Quit\n");
-
-                var input = Console.ReadLine();
-
-                //if (input != null) int.TryParse(input, out lastSelection);
-                //if (lastSelection != 1 && lastSelection != 9) lastSelection = 0;
-
-                //if (lastSelection == 2) DisplayTeamSearch();
-            //}
+            var input = Console.ReadLine();
         }
 
         private void GenerateSeason()
@@ -135,7 +127,8 @@ namespace FootballSeasonSimulator
         {
             foreach (var game in regularSeason[weekNumber-1])
             {
-                string output = game.AwayTeam.Name + game.AwayTeam.GetRecordString() + " v " + game.HomeTeam.Name + game.HomeTeam.GetRecordString();
+                string output =   game.AwayTeam.Name + game.AwayTeam.GetRecordString() + " v " 
+                                + game.HomeTeam.Name + game.HomeTeam.GetRecordString();
 
                 Console.WriteLine(output);
             }
@@ -144,15 +137,39 @@ namespace FootballSeasonSimulator
         private void SimulateWeek(int weekNumber)
         {
                 Console.Clear();
-                Console.WriteLine("-------------\n"
-                                + "WEEK " + weekNumber + " Results\n"
-                                + "-------------\n");
+                Console.WriteLine("--------------\n"
+                                + "WEEK " + weekNumber + " RESULTS\n"
+                                + "--------------\n");
 
                 foreach (var game in regularSeason[weekNumber - 1]) game.Simulate();
 
                 Console.WriteLine("\nPress ENTER to Continue\n");
 
                 var input = Console.ReadLine();
+        }
+        
+        private void CurrentStandings()
+        {
+            Console.Clear();
+            Console.WriteLine("-----------------\n"
+                            + "CURRENT STANDINGS\n"
+                            + "-----------------\n");
+
+            foreach (var division in league.Nfc.Divisions)
+            {
+                division.SortDivision();
+                Console.WriteLine(division.GetStandings());
+            }
+
+            foreach (var division in league.Afc.Divisions)
+            {
+                division.SortDivision();
+                Console.WriteLine(division.GetStandings());
+            }
+
+            Console.WriteLine("\nPress ENTER to Continue\n");
+
+            var input = Console.ReadLine();
         }
     }
 }

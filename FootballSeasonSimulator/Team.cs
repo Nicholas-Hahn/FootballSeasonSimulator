@@ -49,5 +49,29 @@ namespace FootballSeasonSimulator
 
             return " (" + record + ")";
         }
+
+        public int GetWins()
+        {
+            int wins = 0;
+
+            foreach (GameResult result in GameResults)
+            {
+                if (result.OpponentScore < result.Score) wins++;
+            }
+
+            return wins;
+        }
+
+        public int GetLosses()
+        {
+            int losses = 0;
+
+            foreach (GameResult result in GameResults)
+            {
+                if (result.OpponentScore > result.Score) losses++;
+            }
+
+            return losses;
+        }
     }
 }

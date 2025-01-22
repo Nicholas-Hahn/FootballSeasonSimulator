@@ -81,17 +81,11 @@ namespace FootballSeasonSimulator
         {
             foreach (var division in Nfc.Divisions)
             {
-                foreach (var team in division.Teams)
-                {
-                    Teams.Add(team);
-                }
+                foreach (var team in division.Teams) Teams.Add(team);
             }
             foreach (var division in Afc.Divisions)
             {
-                foreach (var team in division.Teams)
-                {
-                    Teams.Add(team);
-                }
+                foreach (var team in division.Teams) Teams.Add(team);
             }
         }
 
@@ -117,6 +111,5 @@ namespace FootballSeasonSimulator
                 }
             }
         }
-
     }
 }

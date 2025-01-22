@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FootballSeasonSimulator
 {
-    internal class GameResult
+    internal struct GameResult
     {
         public Team Opponent { get; }
         public int Score { get; }

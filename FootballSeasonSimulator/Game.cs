@@ -10,8 +10,8 @@ namespace FootballSeasonSimulator
     {
         public Team AwayTeam { get; }
         public Team HomeTeam { get; }
-        public int AwayTeamScore { get; }
-        public int HomeTeamScore { get; }
+        public int AwayTeamScore { get; set; }
+        public int HomeTeamScore { get; set; }
 
         public Game(Team awayTeam, Team homeTeam)
         {
@@ -23,10 +23,34 @@ namespace FootballSeasonSimulator
 
         public void Simulate()
         {
-            //TODO Get score of game
-            //TODO create results for each team, add to team results
+            AwayTeamScore = GenerateRandomScore();
+            HomeTeamScore = GenerateRandomScore();
+
+            AwayTeam.GameResults.Add(new GameResult(HomeTeam, AwayTeamScore, HomeTeamScore));
+            HomeTeam.GameResults.Add(new GameResult(AwayTeam, HomeTeamScore, AwayTeamScore));
+
             Console.WriteLine(AwayTeam.Name + " - " + AwayTeamScore + " : " 
                 + HomeTeamScore + " - " + HomeTeam.Name);
+        }
+
+        public int GenerateRandomScore()
+        {
+            int score = 0;
+            Random random = new Random();
+            int[] scoreOptions = { 0, 0, 0, 0,
+                                   3, 3, 3, 3, 3, 
+                                   7, 7, 7, 7, 
+                                   6, 6, 
+                                   2 
+                                 };
+
+            for (int i = 0; i < 6; i++)
+            {
+                int scoreIndex = random.Next(scoreOptions.Length);
+                score += scoreOptions[scoreIndex];
+            }
+
+            return score;
         }
     }
 }

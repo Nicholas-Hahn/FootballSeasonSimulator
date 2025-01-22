@@ -9,6 +9,7 @@ namespace FootballSeasonSimulator
     internal class Simulator
     {
         int lastSelection = 0;
+        int currentWeek = 1;
         League league;
         List<List<Game>> regularSeason;
 
@@ -26,17 +27,22 @@ namespace FootballSeasonSimulator
 
         private void Loop()
         {
-
+            //while
             MainMenu();
+            if (lastSelection == 9) return;
+            GenerateSeason();
 
-            if (lastSelection == 1)
+            while (currentWeek <= regularSeason.Count)
             {
-                GenerateSeason();
-                WeekStart(1);
-                //Week Simulate
-                //Team Menu
-                //Standings Menu
+                WeekStart(currentWeek);
+                if (lastSelection == 9) return;
+
+                SimulateWeek(currentWeek);
+                if (lastSelection == 9) return;
+
+                currentWeek += 1;
             }
+            
         }
 
         private void MainMenu()
@@ -56,7 +62,7 @@ namespace FootballSeasonSimulator
 
                 var input = Console.ReadLine();
 
-                if (input != null) int.TryParse(input, out lastSelection);
+                if (input == null || !int.TryParse(input, out lastSelection)) lastSelection = 0;
                 if (lastSelection != 1 && lastSelection != 9) lastSelection = 0;
             }
         }
@@ -64,8 +70,8 @@ namespace FootballSeasonSimulator
         private void WeekStart(int weekNumber)
         {
             lastSelection = 0;
-            while (lastSelection == 0)
-            {
+            //while (lastSelection == 0)
+            //{
                 Console.Clear();
                 Console.WriteLine("------\n"
                                 + "WEEK " + weekNumber + "\n"
@@ -74,15 +80,19 @@ namespace FootballSeasonSimulator
                 DisplayWeekSchedule(weekNumber);
                 Console.WriteLine();
 
-                Console.WriteLine("OPTIONS:\n"
-                                + "1. Simulate Week\n"
-                                + "9. Quit\n");
+                Console.WriteLine("\nPress ENTER to Continue\n");
+
+                //Console.WriteLine("OPTIONS:\n"
+                //                + "1. Simulate Week\n"
+                //                + "9. Quit\n");
 
                 var input = Console.ReadLine();
 
-                if (input != null) int.TryParse(input, out lastSelection);
-                if (lastSelection != 1 && lastSelection != 9) lastSelection = 0;
-            }
+                //if (input != null) int.TryParse(input, out lastSelection);
+                //if (lastSelection != 1 && lastSelection != 9) lastSelection = 0;
+
+                //if (lastSelection == 2) DisplayTeamSearch();
+            //}
         }
 
         private void GenerateSeason()
@@ -125,10 +135,24 @@ namespace FootballSeasonSimulator
         {
             foreach (var game in regularSeason[weekNumber-1])
             {
-                string output = game.AwayTeam.Name + " v " + game.HomeTeam.Name; 
+                string output = game.AwayTeam.Name + game.AwayTeam.GetRecordString() + " v " + game.HomeTeam.Name + game.HomeTeam.GetRecordString();
 
                 Console.WriteLine(output);
             }
+        }
+
+        private void SimulateWeek(int weekNumber)
+        {
+                Console.Clear();
+                Console.WriteLine("-------------\n"
+                                + "WEEK " + weekNumber + " Results\n"
+                                + "-------------\n");
+
+                foreach (var game in regularSeason[weekNumber - 1]) game.Simulate();
+
+                Console.WriteLine("\nPress ENTER to Continue\n");
+
+                var input = Console.ReadLine();
         }
     }
 }

@@ -4,5 +4,7 @@ This application simulates a season of NFL football. The program generates a sea
 week-by-week, then summarized at the end of the season. 
 
 **Planned Features**
+- Refactoring matchups to utilize approximation of real league rules
+- Pull power levels from a configuration file
 - After each week, a team can be searched for. The team's current record and standings are shown, along with their schedule.
 - At the end of the season, the playoffs bracket can be viewed, and the playoffs are then simulated as well up until the Super Bowl.

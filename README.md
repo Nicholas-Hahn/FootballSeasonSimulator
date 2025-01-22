@@ -7,4 +7,4 @@ week-by-week with a summary of results and updated divisional standings.
 - Refactoring matchups to utilize approximation of real league rules
 - Pull power levels from a configuration file
 - After each week, a team can be searched for. The team's current record and standings are shown, along with their schedule.
-- At the end of the season, the playoffs bracket can be viewed, and the playoffs are then simulated as well up until the Super Bowl.
+- At the end of the season the playoffs bracket is populated based on season results, can be viewed, and are then simulated.

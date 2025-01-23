@@ -12,6 +12,7 @@ namespace FootballSeasonSimulator
         public int OffensePower { get; }
         public int DefensePower { get; }
         public List<GameResult> GameResults { get; }
+        public bool LostPlayoffs { get; set; }
 
         public Team(string name, int offensePower, int defensePower)
         {
@@ -19,6 +20,7 @@ namespace FootballSeasonSimulator
             OffensePower = offensePower;
             DefensePower = defensePower;
             GameResults = new List<GameResult>();
+            LostPlayoffs = false;
         }
 
         public Team(string name)

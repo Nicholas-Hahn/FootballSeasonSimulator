@@ -12,7 +12,7 @@ namespace FootballSeasonSimulator
         public Conference Nfc { get; }
         public Conference Afc { get; }
         public List<Team> Teams { get; }
-
+        
         public League()
         {
             Nfc = new Conference("NFC");

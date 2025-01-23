@@ -9,3 +9,7 @@ After 18 weeks of regular season, the playoffs are seeded based on division winn
 - Refactoring matchups to utilize approximation of real league rules
 - Pull power levels from a configuration file
 - After each week, a team can be searched for. The team's current record and standings are shown, along with their schedule.
+
+**Planned Code Improvements**
+- Refactor to decrease Simulator class size
+- Introduce Dependency Injection

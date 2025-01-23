@@ -19,7 +19,7 @@ namespace FootballSeasonSimulator
             playoffSeeds = new List<Team>();
         }
 
-        public void FillPlayoffSeeds()
+        public List<Team> GeneratePlayoffSeeds()
         {
             //Get all Divisonal winners and all other teams
             List<Team> divisionWinners = new List<Team>();
@@ -77,17 +77,8 @@ namespace FootballSeasonSimulator
             {
                 playoffSeeds.Add(sortedRemainingTeams[i]);
             }
-        }
 
-        public string GetPlayoffsSeedingString()
-        {
-            string output = Name + "\n";
-            for (int i = 0; i < playoffSeeds.Count; i++)
-            {
-                output += (i+1) + " - " + playoffSeeds[i].Name + playoffSeeds[i].GetRecordString() + "\n";
-            }
-
-            return output;
+            return playoffSeeds;
         }
     }
 }
